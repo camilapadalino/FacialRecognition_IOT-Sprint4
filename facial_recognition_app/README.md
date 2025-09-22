@@ -2,6 +2,8 @@
 
 Uma aplicação desktop para reconhecimento e identificação facial em tempo real usando OpenCV, MediaPipe e PyQt5.
 
+Gabriel teixeira machado rm551570 Guilherme Brazioli rm98237 Felipe Bressane rm97688 Camila do Prado Padalino rm98316
+
 ## 📋 Objetivo
 
 Desenvolver uma aplicação local (desktop/notebook) que realize reconhecimento/identificação facial do usuário usando OpenCV, IA/ML ou Haar Cascade (qualquer tecnologia que envolva parâmetros ajustáveis). A aplicação não precisa estar conectada à aplicação/solução final.
@@ -275,15 +277,4 @@ O desenvolvedor desta aplicação não se responsabiliza pelo uso inadequado ou 
 1. Execute `python test_app.py` e inclua a saída
 2. Descreva o comportamento esperado vs. observado
 3. Inclua informações do sistema (OS, Python version, hardware)
-
-### Contribuições
-
-Este projeto foi desenvolvido como trabalho acadêmico. Sugestões de melhorias são bem-vindas para fins educacionais.
-
----
-
-**Desenvolvido para o curso IOT & JOB**  
-**Tecnologias**: OpenCV, MediaPipe, PyQt5, Python  
-**Versão**: 1.0.0  
-**Data**: 2024
 
