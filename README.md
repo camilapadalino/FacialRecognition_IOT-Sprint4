@@ -1,134 +1,136 @@
-# POC de Integração de Reconhecimento Facial com IoT (SprintIOT)
+# 🧠💡 POC de Integração de Reconhecimento Facial com IoT  
+### *Projeto Acadêmico — Sprint 4 - IoT — FIAP 2025*
 
-## Visão Geral
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
+![OpenCV](https://img.shields.io/badge/OpenCV-4.x-orange?logo=opencv)
+![IoT](https://img.shields.io/badge/IoT-Simulation-success)
+![Status](https://img.shields.io/badge/Status-POC%20Completa-brightgreen)
+![License](https://img.shields.io/badge/License-Acad%C3%AAmico-lightgrey)
 
-Este projeto é uma Prova de Conceito (POC) que demonstra a integração de um módulo de reconhecimento facial (baseado em OpenCV, MediaPipe e PyQt5) com um sistema simulado de Internet das Coisas (IoT). O objetivo é cumprir os requisitos de uma entrega acadêmica, focando na simplicidade e na prova de conexão entre os dois módulos através de um mecanismo de log de eventos.
+---
 
-## Requisitos do Professor Atendidos
+## 🚀 Alunos:
+- Camila do Prado Padalino - RM98316
+- Felipe Cavalcante Bressane - RM97688
+- Gabriel Teixeira Machado - RM551570
+- Guilherme Brazioli - RM98237
 
-*   **Objetivo**: Evoluir a POC da Entrega 3 (aplicação de reconhecimento facial) para que esteja integrada ao projeto principal (`sprintIOT`). O reconhecimento facial foi incorporado de forma prática à aplicação final, de maneira simples.
-*   **Integração Mínima Exigida**: O módulo de reconhecimento facial envia/registra um evento (`face_detection_log.txt`) que dispara uma ação/fluxo simulado na aplicação IoT, provando a conexão entre os dois.
-*   **Demonstração (vídeo até 5 min)**: Será fornecido um vídeo demonstrativo (a ser gravado pelo aluno) que apresente a solução em funcionamento.
-*   **Arquitetura Geral do Projeto Final**: Visão clara dos módulos e seu funcionamento.
-*   **Demonstração da Integração**: Fluxo do reconhecimento facial até a resposta no sistema final.
-*   **Cenário Prático**: Demonstração de comportamento "face reconhecida → ação IoT".
-*   **Funcionalidade e Integração**: Reconhecimento facial funcionando de forma consistente e integração prática com a aplicação escolhida.
-*   **Repositório e Documentação**: README atualizado com instruções completas para rodar a solução final e explicação clara de como o reconhecimento facial está conectado com o restante da aplicação.
+---
 
-## Arquitetura da Solução
+## 📘 Visão Geral
 
-A solução é composta por dois módulos principais que se comunicam via um arquivo de log compartilhado:
+Esta **Prova de Conceito (POC)** demonstra a integração entre um sistema de **reconhecimento facial** (usando *OpenCV*, *MediaPipe* e *PyQt5*) e uma **simulação de aplicação IoT**, atendendo aos requisitos de entrega acadêmica.
 
-1.  **Módulo de Reconhecimento Facial (`facial_recognition_app`)**: A aplicação desktop que detecta faces em tempo real. Foi modificada para registrar eventos de detecção em um arquivo de log.
-2.  **Módulo de Integração IoT (`iot_integration_script.py`)**: Um script Python que simula a aplicação IoT. Ele monitora o arquivo de log e executa uma ação simulada (impressão no console) quando um evento de detecção facial é registrado.
+O foco é **provar a comunicação entre os módulos** — quando uma face é detectada, um evento é registrado e o módulo IoT simula uma ação (por exemplo, acionar um dispositivo).
 
-```mermaid
-graph TD
-    A[Módulo de Reconhecimento Facial] --> B(Geração de Evento de Log)
-    B --> C[Arquivo de Log: face_detection_log.txt]
-    C --> D[Módulo de Integração IoT (Monitoramento de Log)]
-    D --> E[Ação IoT Simulada (Ex: Acionamento de Dispositivo)]
+---
 
-    subgraph Projeto sprintIOT
-        A
-        B
-        C
-        D
-        E
-    end
-```
+## 🔮 Integração Futura com o MoneyWise App
 
-## Estrutura do Projeto
+Esta POC serve como **base tecnológica** para futuras integrações com o aplicativo [**MoneyWise App**](https://github.com/camilapadalino/MoneyWiseApp), um projeto desenvolvido anteriormente pela equipe e voltado à **educação financeira com apoio de inteligência artificial (IA)**.
 
-```
-sprintIOT/
-├── facial_recognition_app/       # Aplicação de Reconhecimento Facial original
-│   ├── main.py                   # Ponto de entrada da aplicação GUI
-│   ├── requirements.txt          # Dependências do módulo facial
-│   ├── src/                      # Código fonte do módulo facial
-│   │   ├── camera_manager.py
-│   │   ├── face_detector.py
-│   │   └── gui_application.py    # Modificado para gerar log
-│   └── ... (outros arquivos)
-├── iot_integration_script.py     # Script de simulação da aplicação IoT
-├── face_detection_log.txt        # Arquivo de log gerado (ignorada pelo Git)
-├── DOCUMENTACAO_TECNICA.md       # Documentação detalhada da POC
-└── README.md                     # Este arquivo
-```
+A implementação do **reconhecimento facial** no *MoneyWise App* está planejada para as próximas etapas de desenvolvimento e deverá agregar **segurança, personalização e análise comportamental** à experiência do usuário.
 
-## Instalação e Configuração
+---
 
-1.  **Clone o repositório:**
-    ```bash
-    git clone https://github.com/MachadONLY/sprintIOT.git
-    cd sprintIOT
-    ```
+### 📌 Aplicações Futuras no MoneyWise App
 
-2.  **Crie e ative um ambiente virtual (recomendado):**
-    ```bash
-    python3.11 -m venv venv
-    source venv/bin/activate # Para Linux/macOS
-    # ou .\venv\Scripts\activate # Para Windows (no PowerShell)
-    # ou venv\Scripts\activate # Para Windows (no Prompt de Comando)
-    ```
+- **🔐 Autenticação e Login Inteligente:**  
+  Permitir que os usuários acessem o aplicativo ou confirmem transações financeiras utilizando o reconhecimento facial como método de autenticação biométrica.  
+  Essa integração proporcionará **maior segurança e praticidade**, eliminando a necessidade de senhas convencionais e reduzindo riscos de acesso indevido.
 
-3.  **Instale as dependências:**
-    ```bash
-    pip install -r facial_recognition_app/requirements.txt
-    ```
+- **🧾 Registro de Presença e Auditoria de Sessões:**  
+  Utilizar o reconhecimento facial para **registrar a presença e as atividades** dos usuários, criando um **histórico seguro de acessos**.  
+  Esse registro poderá ser utilizado para **auditoria, monitoramento de segurança** e análise de padrões de uso dentro do aplicativo.
 
-## Como Executar a Demonstração
+- **📊 Dados para Dashboards e Business Intelligence (BI):**  
+  Integrar os dados provenientes do reconhecimento facial ao **painel de BI do MoneyWise**, permitindo **análises avançadas de comportamento**, identificação de padrões e geração de **insights estratégicos** sobre a utilização do aplicativo.
 
-Para demonstrar a integração, você precisará de **dois terminais** abertos no diretório raiz do projeto `sprintIOT`.
+---
 
-### Terminal 1: Iniciar o Monitoramento IoT
+### 💡 Objetivo da Integração
 
-Neste terminal, execute o script que simula a aplicação IoT. Ele monitorará o arquivo de log em busca de eventos de detecção facial.
+O objetivo dessa integração é **expandir o ecossistema do MoneyWise App**, incorporando tecnologias de **visão computacional e biometria facial**.  
+Essa evolução reforça o compromisso do projeto com a **inovação, segurança e experiência do usuário**, utilizando a POC atual como **prova de viabilidade técnica** da comunicação entre módulos de reconhecimento facial e sistemas de gestão financeira inteligentes.
 
+---
+
+## 🎬 Vídeo de Demonstração
+
+### 📺 [Inserir link aqui quando disponível]
+
+---
+## 🧠 Tecnologias Utilizadas:
+- **Categoria:**	Ferramentas / Bibliotecas <br>
+- **Linguagem:**	Python 3.11 <br>
+- **Visão Computacional:**	OpenCV, MediaPipe <br>
+- **Interface Gráfica:**	PyQt5 <br>
+- **Integração IoT:**	Monitoramento de arquivos (os, time) <br>
+- **Ambiente:**	Cross-platform (Windows/Linux/macOS)
+
+--- 
+
+## ⚙️ Instalação e Configuração
+### 1. Clone o repositório
 ```bash
+git clone https://github.com/camilapadalino/FacialRecognition_IOT-Sprint4.git
+cd FacialRecognition_IOT-Sprint4
+```
+### 2. Crie e ative um ambiente virtual
+```bash
+python3.11 -m venv venv
+source venv/bin/activate          # Linux/macOS
+# ou
+.\venv\Scripts\activate           # Windows PowerShell
+```
+### 3. Instale as dependências
+``` bash
+pip install -r facial_recognition_app/requirements.txt
+```
+---
+
+## 🚀 Como Executar a Demonstração
+
+> 🧠 Dica: abra dois terminais no diretório raiz sprintIOT.
+
+### 🖥️ Terminal 1 — Iniciar o Monitoramento IoT
+
+Executa o script que simula o sistema IoT, monitorando eventos do log.
+````
 python3 iot_integration_script.py
-```
+````
+Saída esperada:
 
-Você verá a mensagem: `Monitorando o arquivo de log: face_detection_log.txt`.
+> Monitorando o arquivo de log: face_detection_log.txt
 
-### Terminal 2: Iniciar a Aplicação de Reconhecimento Facial
 
-Neste segundo terminal, inicie a aplicação de reconhecimento facial:
+### 🎥 Terminal 2 — Iniciar a Aplicação de Reconhecimento Facial
 
-```bash
+Execute a aplicação GUI do módulo facial:
+````
 cd facial_recognition_app
 python3 main.py
-```
+````
+A janela será aberta com os controles de câmera e detecção facial.
 
-Uma janela da aplicação de reconhecimento facial será aberta.
+### 🔄 Fluxo de Integração em Tempo Real
 
-### Demonstração da Integração
+1. Clique em “Iniciar Câmera”.
 
-1.  Na janela da aplicação de reconhecimento facial, clique em **"Iniciar Câmera"**.
-2.  Posicione seu rosto ou uma imagem de rosto na frente da câmera. A aplicação detectará a face e exibirá as informações.
-3.  Observe o **Terminal 1 (IoT Monitoramento)**: A cada detecção facial, você verá mensagens como:
-    ```
-    [IoT Ação] Evento de detecção facial recebido: [YYYY-MM-DD HH:MM:SS] Face detectada: X faces.
-    [IoT Ação] Acionando dispositivo IoT (ex: LED, buzzer).
-    ```
-    Esta é a prova da integração: o evento de reconhecimento facial disparou uma ação simulada no módulo IoT.
+2. Aponte seu rosto ou uma imagem com rostos.
 
-4.  Para parar, clique em "Parar Câmera" na aplicação de reconhecimento facial e pressione `Ctrl+C` nos dois terminais.
+A aplicação detectará a(s) face(s) e registrará o evento no log.
 
-## Link do Vídeo de Demonstração
+Observe o Terminal 1 — o módulo IoT exibirá mensagens como:
+````
+[IoT Ação] Evento de detecção facial recebido: [2025-10-17 15:45:22]
+[IoT Ação] Acionando dispositivo IoT (ex: LED, buzzer)
+````
 
-[INSERIR AQUI O LINK PARA O VÍDEO DE DEMONSTRAÇÃO QUANDO ESTIVER PRONTO]
+### 🧩 Prova da integração: a detecção facial gera um evento que aciona uma resposta IoT simulada.
 
-## Autor
+Para encerrar:
 
-Manus AI (para a integração e documentação)
+Clique em “Parar Câmera” na GUI.
 
-## Contribuições
-
-Este projeto foi baseado no trabalho original de:
-
-*   Gabriel Teixeira Machado (RM551570)
-*   Guilherme Brazioli (RM98237)
-*   Felipe Bressane (RM97688)
-*   Camila do Prado Padalino (RM98316)
-
+Pressione Ctrl+C em ambos os terminais.
