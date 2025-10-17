@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
 from PyQt5.QtCore import QTimer, Qt, pyqtSignal
 from PyQt5.QtGui import QImage, QPixmap, QFont
 from face_detector import FaceDetector
-from camera_manager import CameraManagergit rm -r --cached venv
+from camera_manager import CameraManagergit 
 
 
 class VideoWidget(QLabel):
