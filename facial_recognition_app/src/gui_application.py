@@ -1,4 +1,6 @@
 import sys
+import os
+from datetime import datetime
 import cv2
 import numpy as np
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
@@ -393,7 +395,7 @@ class FacialRecognitionApp(QMainWindow):
         self.video_widget.setText("Câmera parada")
         self.info_panel.update_info([], 0)
         print("Câmera parada")
-    
+
     def update_frame(self):
         """
         Atualiza o frame do vídeo.
@@ -405,6 +407,7 @@ class FacialRecognitionApp(QMainWindow):
             ret, frame = self.camera_manager.read_frame()
             
             if ret and frame is not None:
+
                 # Processa detecção facial
                 annotated_frame, faces_info = self.face_detector.detect_faces(frame)
                 
@@ -417,9 +420,21 @@ class FacialRecognitionApp(QMainWindow):
                 # Conta frames para FPS
                 self.fps_counter += 1
                 
+                # Log de evento de detecção facial
+                if faces_info:
+                    self.log_face_detection_event(faces_info)
+                
         except Exception as e:
             print(f"Erro ao atualizar frame: {e}")
-    
+
+    def log_face_detection_event(self, faces_info):
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        log_entry = f"[{timestamp}] Face detectada: {len(faces_info)} faces.\n"
+        log_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'face_detection_log.txt')
+        with open(log_file_path, "a") as f:
+            f.write(log_entry)
+        print(f"Log: {log_entry.strip()}")
+
     def update_fps(self):
         """
         Atualiza o contador de FPS.
@@ -458,4 +473,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

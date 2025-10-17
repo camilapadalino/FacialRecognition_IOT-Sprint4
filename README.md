@@ -1,280 +1,134 @@
-# Aplicação de Reconhecimento Facial - IOT & JOB
+# POC de Integração de Reconhecimento Facial com IoT (SprintIOT)
 
-Uma aplicação desktop para reconhecimento e identificação facial em tempo real usando OpenCV, MediaPipe e PyQt5.
+## Visão Geral
 
-Gabriel teixeira machado rm551570 Guilherme Brazioli rm98237 Felipe Bressane rm97688 Camila do Prado Padalino rm98316
+Este projeto é uma Prova de Conceito (POC) que demonstra a integração de um módulo de reconhecimento facial (baseado em OpenCV, MediaPipe e PyQt5) com um sistema simulado de Internet das Coisas (IoT). O objetivo é cumprir os requisitos de uma entrega acadêmica, focando na simplicidade e na prova de conexão entre os dois módulos através de um mecanismo de log de eventos.
 
-## 📋 Objetivo
+## Requisitos do Professor Atendidos
 
-Desenvolver uma aplicação local (desktop/notebook) que realize reconhecimento/identificação facial do usuário usando OpenCV, IA/ML ou Haar Cascade (qualquer tecnologia que envolva parâmetros ajustáveis). A aplicação não precisa estar conectada à aplicação/solução final.
+*   **Objetivo**: Evoluir a POC da Entrega 3 (aplicação de reconhecimento facial) para que esteja integrada ao projeto principal (`sprintIOT`). O reconhecimento facial foi incorporado de forma prática à aplicação final, de maneira simples.
+*   **Integração Mínima Exigida**: O módulo de reconhecimento facial envia/registra um evento (`face_detection_log.txt`) que dispara uma ação/fluxo simulado na aplicação IoT, provando a conexão entre os dois.
+*   **Demonstração (vídeo até 5 min)**: Será fornecido um vídeo demonstrativo (a ser gravado pelo aluno) que apresente a solução em funcionamento.
+*   **Arquitetura Geral do Projeto Final**: Visão clara dos módulos e seu funcionamento.
+*   **Demonstração da Integração**: Fluxo do reconhecimento facial até a resposta no sistema final.
+*   **Cenário Prático**: Demonstração de comportamento "face reconhecida → ação IoT".
+*   **Funcionalidade e Integração**: Reconhecimento facial funcionando de forma consistente e integração prática com a aplicação escolhida.
+*   **Repositório e Documentação**: README atualizado com instruções completas para rodar a solução final e explicação clara de como o reconhecimento facial está conectado com o restante da aplicação.
 
-## 🚀 Características Principais
+## Arquitetura da Solução
 
-- **Detecção facial em tempo real** usando MediaPipe
-- **Landmarks faciais** com visualização detalhada dos pontos característicos
-- **Interface gráfica intuitiva** desenvolvida em PyQt5
-- **Parâmetros ajustáveis** em tempo real para demonstração de impacto
-- **Identificação facial simplificada** usando comparação de histogramas
-- **Estatísticas em tempo real** (FPS, número de faces detectadas)
-- **Código executável** com instruções claras
+A solução é composta por dois módulos principais que se comunicam via um arquivo de log compartilhado:
 
-## 🛠️ Tecnologias Utilizadas
+1.  **Módulo de Reconhecimento Facial (`facial_recognition_app`)**: A aplicação desktop que detecta faces em tempo real. Foi modificada para registrar eventos de detecção em um arquivo de log.
+2.  **Módulo de Integração IoT (`iot_integration_script.py`)**: Um script Python que simula a aplicação IoT. Ele monitora o arquivo de log e executa uma ação simulada (impressão no console) quando um evento de detecção facial é registrado.
 
-- **OpenCV 4.12.0**: Processamento de imagem e vídeo
-- **MediaPipe 0.10.14**: Detecção facial e landmarks
-- **PyQt5**: Interface gráfica
-- **NumPy**: Operações matemáticas e arrays
-- **Python 3.11**: Linguagem de programação
+```mermaid
+graph TD
+    A[Módulo de Reconhecimento Facial] --> B(Geração de Evento de Log)
+    B --> C[Arquivo de Log: face_detection_log.txt]
+    C --> D[Módulo de Integração IoT (Monitoramento de Log)]
+    D --> E[Ação IoT Simulada (Ex: Acionamento de Dispositivo)]
 
-## 📦 Requisitos do Sistema
+    subgraph Projeto sprintIOT
+        A
+        B
+        C
+        D
+        E
+    end
+```
 
-- Python 3.11 ou superior
-- Câmera web (opcional, para demonstração em tempo real)
-- Sistema operacional: Windows, macOS ou Linux
-- Memória RAM: Mínimo 4GB recomendado
-- Processador: Qualquer processador moderno (x86_64)
+## Estrutura do Projeto
 
-## 🔧 Instalação e Configuração
+```
+sprintIOT/
+├── facial_recognition_app/       # Aplicação de Reconhecimento Facial original
+│   ├── main.py                   # Ponto de entrada da aplicação GUI
+│   ├── requirements.txt          # Dependências do módulo facial
+│   ├── src/                      # Código fonte do módulo facial
+│   │   ├── camera_manager.py
+│   │   ├── face_detector.py
+│   │   └── gui_application.py    # Modificado para gerar log
+│   └── ... (outros arquivos)
+├── iot_integration_script.py     # Script de simulação da aplicação IoT
+├── face_detection_log.txt        # Arquivo de log gerado (ignorada pelo Git)
+├── DOCUMENTACAO_TECNICA.md       # Documentação detalhada da POC
+└── README.md                     # Este arquivo
+```
 
-### 1. Preparação do Ambiente
+## Instalação e Configuração
+
+1.  **Clone o repositório:**
+    ```bash
+    git clone https://github.com/MachadONLY/sprintIOT.git
+    cd sprintIOT
+    ```
+
+2.  **Crie e ative um ambiente virtual (recomendado):**
+    ```bash
+    python3.11 -m venv venv
+    source venv/bin/activate # Para Linux/macOS
+    # ou .\venv\Scripts\activate # Para Windows (no PowerShell)
+    # ou venv\Scripts\activate # Para Windows (no Prompt de Comando)
+    ```
+
+3.  **Instale as dependências:**
+    ```bash
+    pip install -r facial_recognition_app/requirements.txt
+    ```
+
+## Como Executar a Demonstração
+
+Para demonstrar a integração, você precisará de **dois terminais** abertos no diretório raiz do projeto `sprintIOT`.
+
+### Terminal 1: Iniciar o Monitoramento IoT
+
+Neste terminal, execute o script que simula a aplicação IoT. Ele monitorará o arquivo de log em busca de eventos de detecção facial.
 
 ```bash
-# Clone ou extraia o projeto
+python3 iot_integration_script.py
+```
+
+Você verá a mensagem: `Monitorando o arquivo de log: face_detection_log.txt`.
+
+### Terminal 2: Iniciar a Aplicação de Reconhecimento Facial
+
+Neste segundo terminal, inicie a aplicação de reconhecimento facial:
+
+```bash
 cd facial_recognition_app
-
-# Crie um ambiente virtual Python
-python3.11 -m venv venv
-
-# Ative o ambiente virtual
-# No Linux/macOS:
-source venv/bin/activate
-# No Windows:
-# venv\\Scripts\\activate
+python3 main.py
 ```
 
-### 2. Instalação das Dependências
+Uma janela da aplicação de reconhecimento facial será aberta.
 
-```bash
-# Instale as dependências necessárias
-pip install opencv-python mediapipe PyQt5
-```
+### Demonstração da Integração
 
-### 3. Verificação da Instalação
+1.  Na janela da aplicação de reconhecimento facial, clique em **"Iniciar Câmera"**.
+2.  Posicione seu rosto ou uma imagem de rosto na frente da câmera. A aplicação detectará a face e exibirá as informações.
+3.  Observe o **Terminal 1 (IoT Monitoramento)**: A cada detecção facial, você verá mensagens como:
+    ```
+    [IoT Ação] Evento de detecção facial recebido: [YYYY-MM-DD HH:MM:SS] Face detectada: X faces.
+    [IoT Ação] Acionando dispositivo IoT (ex: LED, buzzer).
+    ```
+    Esta é a prova da integração: o evento de reconhecimento facial disparou uma ação simulada no módulo IoT.
 
-```bash
-# Execute o script de teste
-python test_app.py
-```
+4.  Para parar, clique em "Parar Câmera" na aplicação de reconhecimento facial e pressione `Ctrl+C` nos dois terminais.
 
-Se todos os testes passarem, a aplicação está pronta para uso.
+## Link do Vídeo de Demonstração
 
-## 🎮 Como Executar
+[INSERIR AQUI O LINK PARA O VÍDEO DE DEMONSTRAÇÃO QUANDO ESTIVER PRONTO]
 
-### Execução Principal
+## Autor
 
-```bash
-# Certifique-se de que o ambiente virtual está ativado
-source venv/bin/activate  # Linux/macOS
-# ou
-# venv\\Scripts\\activate  # Windows
+Manus AI (para a integração e documentação)
 
-# Execute a aplicação
-python main.py
-```
+## Contribuições
 
-### Execução Alternativa
+Este projeto foi baseado no trabalho original de:
 
-```bash
-# Execução direta do módulo principal
-python src/gui_application.py
-```
-
-## 📱 Como Usar a Aplicação
-
-### Interface Principal
-
-A aplicação possui uma interface dividida em três seções principais:
-
-1. **Painel de Vídeo (Esquerda)**:
-   - Exibe o feed da câmera em tempo real
-   - Mostra as detecções faciais com anotações
-   - Botões para iniciar/parar a câmera
-
-2. **Painel de Parâmetros (Direita Superior)**:
-   - **Confiança de Detecção**: Ajusta a sensibilidade da detecção facial (0.10 - 1.00)
-   - **Confiança de Rastreamento**: Ajusta a estabilidade do rastreamento (0.10 - 1.00)
-   - **Opções de Visualização**:
-     - Mostrar Landmarks Faciais
-     - Mostrar Caixas Delimitadoras
-     - Mostrar ID das Faces
-
-3. **Painel de Informações (Direita Inferior)**:
-   - Informações detalhadas das faces detectadas
-   - Estatísticas em tempo real (FPS, contagem de faces)
-
-### Controles e Parâmetros
-
-#### Parâmetros Ajustáveis
-
-1. **Confiança de Detecção (0.10 - 1.00)**:
-   - **Valores baixos (0.10-0.40)**: Detecta mais faces, mas pode gerar falsos positivos
-   - **Valores médios (0.50-0.70)**: Balanceamento entre precisão e recall
-   - **Valores altos (0.80-1.00)**: Detecta apenas faces com alta confiança
-
-2. **Confiança de Rastreamento (0.10 - 1.00)**:
-   - **Valores baixos**: Rastreamento mais sensível a mudanças
-   - **Valores altos**: Rastreamento mais estável, menos oscilação
-
-#### Opções de Visualização
-
-- **Landmarks Faciais**: Exibe pontos característicos do rosto (olhos, nariz, boca, contorno)
-- **Caixas Delimitadoras**: Mostra retângulos ao redor das faces detectadas
-- **ID das Faces**: Exibe identificadores únicos para cada face
-
-### Demonstração de Impacto dos Parâmetros
-
-Para demonstrar o impacto dos parâmetros:
-
-1. **Inicie a aplicação** e ative a câmera
-2. **Ajuste a confiança de detecção**:
-   - Diminua para 0.20 e observe mais detecções (possivelmente falsas)
-   - Aumente para 0.80 e observe detecções mais conservadoras
-3. **Teste as opções de visualização**:
-   - Desative landmarks para ver apenas as caixas
-   - Ative/desative diferentes combinações
-4. **Observe as estatísticas** em tempo real no painel de informações
-
-## 🏗️ Estrutura do Projeto
-
-```
-facial_recognition_app/
-├── main.py                 # Arquivo principal de execução
-├── test_app.py            # Script de testes
-├── README.md              # Documentação (este arquivo)
-├── requirements.txt       # Dependências do projeto
-└── src/                   # Código fonte
-    ├── face_detector.py   # Módulo de detecção facial
-    ├── camera_manager.py  # Gerenciamento da câmera
-    └── gui_application.py # Interface gráfica principal
-```
-
-### Descrição dos Módulos
-
-#### `face_detector.py`
-- Classe `FaceDetector`: Implementa detecção facial usando MediaPipe
-- Métodos para detecção, landmarks e identificação facial
-- Parâmetros ajustáveis em tempo real
-- Comparação de faces usando histogramas
-
-#### `camera_manager.py`
-- Classe `CameraManager`: Gerencia captura de vídeo
-- Configuração de resolução e propriedades da câmera
-- Tratamento de erros e liberação de recursos
-
-#### `gui_application.py`
-- Interface gráfica principal usando PyQt5
-- Painéis de controle e visualização
-- Integração entre detector facial e câmera
-- Atualização em tempo real dos parâmetros
-
-## 🔍 Funcionalidades Técnicas
-
-### Detecção Facial
-- Utiliza o modelo de detecção facial do MediaPipe
-- Suporte para múltiplas faces simultâneas (até 5)
-- Detecção de landmarks faciais com 468 pontos
-- Cálculo de confiança para cada detecção
-
-### Identificação Facial
-- Implementação simplificada usando histogramas de intensidade
-- Comparação de faces baseada em correlação
-- Extração de características da região facial
-- Normalização e redimensionamento automático
-
-### Interface e Usabilidade
-- Interface responsiva e intuitiva
-- Controles em tempo real sem necessidade de reinicialização
-- Feedback visual imediato das alterações
-- Estatísticas de performance (FPS)
-
-## 🧪 Testes e Validação
-
-### Script de Testes Automatizados
-
-Execute `python test_app.py` para validar:
-
-- ✅ Importação de todas as dependências
-- ✅ Criação e configuração do detector facial
-- ✅ Funcionamento do gerenciador de câmera
-- ✅ Atualização de parâmetros em tempo real
-- ✅ Liberação adequada de recursos
-
-### Cenários de Teste Manual
-
-1. **Teste sem câmera**: A aplicação deve iniciar normalmente e exibir mensagem apropriada
-2. **Teste com câmera**: Detecção facial deve funcionar em tempo real
-3. **Teste de parâmetros**: Alterações devem refletir imediatamente na detecção
-4. **Teste de performance**: FPS deve ser estável (>15 FPS em hardware moderno)
-
-## ⚠️ Limitações e Próximos Passos
-
-### Limitações Atuais
-
-- **Identificação facial**: Implementação simplificada usando histogramas (não é robusta para identificação real)
-- **Dependência de iluminação**: Performance pode variar com condições de luz
-- **Processamento single-thread**: Não otimizado para múltiplos cores
-- **Armazenamento**: Não salva faces ou dados de identificação
-
-### Próximos Passos
-
-- Implementar identificação facial mais robusta (ex: usando embeddings faciais)
-- Adicionar suporte para salvar e carregar perfis de faces
-- Otimizar performance para processamento em tempo real
-- Adicionar mais opções de visualização e análise
-- Implementar detecção de emoções e características faciais
-
-## 🔒 Considerações Éticas e Privacidade
-
-### Uso Responsável de Dados Faciais
-
-Esta aplicação foi desenvolvida para fins educacionais e de demonstração. Ao usar tecnologias de reconhecimento facial, é importante considerar:
-
-#### Privacidade e Consentimento
-- **Sempre obtenha consentimento** antes de processar dados biométricos de terceiros
-- **Não armazene** dados faciais sem autorização explícita
-- **Informe claramente** sobre o processamento de dados biométricos
-
-#### Segurança dos Dados
-- **Processamento local**: Esta aplicação processa dados localmente, sem envio para servidores externos
-- **Não persistência**: Os dados faciais não são salvos permanentemente
-- **Acesso limitado**: Apenas a aplicação tem acesso aos dados durante a execução
-
-#### Conformidade Legal
-- **LGPD (Brasil)**: Dados biométricos são considerados sensíveis
-- **GDPR (Europa)**: Requer consentimento explícito para processamento
-- **Outras jurisdições**: Verifique as leis locais aplicáveis
-
-#### Recomendações de Uso
-- Use apenas para fins educacionais, pesquisa ou desenvolvimento
-- Não implemente em produção sem revisão legal adequada
-- Considere implementar controles de acesso e auditoria
-- Documente claramente o propósito e escopo do processamento
-
-### Responsabilidade do Desenvolvedor
-
-O desenvolvedor desta aplicação não se responsabiliza pelo uso inadequado ou ilegal da tecnologia. É responsabilidade do usuário garantir conformidade com leis e regulamentações aplicáveis.
-
-## 📞 Suporte e Contribuições
-
-### Problemas Conhecidos
-
-- **Erro de câmera**: Se a câmera não iniciar, verifique se não está sendo usada por outro aplicativo
-- **Performance baixa**: Em hardware mais antigo, reduza a resolução da câmera
-- **Dependências**: Certifique-se de que todas as dependências estão instaladas corretamente
-
-### Como Reportar Problemas
-
-1. Execute `python test_app.py` e inclua a saída
-2. Descreva o comportamento esperado vs. observado
-3. Inclua informações do sistema (OS, Python version, hardware)
+*   Gabriel Teixeira Machado (RM551570)
+*   Guilherme Brazioli (RM98237)
+*   Felipe Bressane (RM97688)
+*   Camila do Prado Padalino (RM98316)
 
