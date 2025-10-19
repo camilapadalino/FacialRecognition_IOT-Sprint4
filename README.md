@@ -200,8 +200,3 @@ Pressione `Ctrl+C` em ambos os terminais.
 
 [1] Repositório da POC de Reconhecimento Facial: [https://github.com/camilapadalino/FacialRecognition_IOT-Sprint4.git](https://github.com/camilapadalino/FacialRecognition_IOT-Sprint4.git)
 [2] Repositório do MoneyWise App: [https://github.com/camilapadalino/MoneyWiseApp.git](https://github.com/camilapadalino/MoneyWiseApp.git)
-
----
-
-**Autor:** Manus AI
-**Data:** 19 de Outubro de 2025
