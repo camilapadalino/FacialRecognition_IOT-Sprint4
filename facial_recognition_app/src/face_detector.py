@@ -163,14 +163,7 @@ class FaceDetector:
                     self.mp_drawing_styles.get_default_face_mesh_contours_style()
                 )
                 
-                # Desenha landmarks dos olhos
-                self.mp_drawing.draw_landmarks(
-                    annotated_image,
-                    face_landmarks,
-                    self.mp_face_mesh.FACEMESH_IRISES,
-                    None,
-                    self.mp_drawing_styles.get_default_face_mesh_iris_style()
-                )
+
         
         return annotated_image, faces_info
     
@@ -238,4 +231,3 @@ class FaceDetector:
             self.face_detection.close()
         if hasattr(self, 'face_mesh'):
             self.face_mesh.close()
-
