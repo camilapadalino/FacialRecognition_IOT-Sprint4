@@ -18,6 +18,12 @@
 
 ---
 
+## 🎬 Vídeo de Demonstração
+
+### 📺 https://drive.google.com/file/d/1jf9xGbGNvSGTHyuX2_VFu4YbV4XBv-nx/view?usp=sharing
+
+---
+
 ## 📘 Visão Geral
 
 Esta **Prova de Conceito (POC)** demonstra a integração entre um sistema de **reconhecimento facial** (usando *OpenCV*, *MediaPipe* e *Python com Flask*) e o **MoneyWise App**, um aplicativo mobile desenvolvido em *React Native (Expo)*.
@@ -48,12 +54,6 @@ A implementação do **reconhecimento facial** no *MoneyWise App* agrega **segur
 ### 💡 Objetivo da Integração
 
 O objetivo dessa integração é **expandir o ecossistema do MoneyWise App**, incorporando tecnologias de **visão computacional e biometria facial**. Essa evolução reforça o compromisso do projeto com a **inovação, segurança e experiência do usuário**, utilizando a POC atual como **prova de viabilidade técnica** da comunicação entre módulos de reconhecimento facial e sistemas de gestão financeira inteligentes.
-
----
-
-## 🎬 Vídeo de Demonstração
-
-### 📺 https://drive.google.com/file/d/1jf9xGbGNvSGTHyuX2_VFu4YbV4XBv-nx/view?usp=sharing
 
 ---
 
