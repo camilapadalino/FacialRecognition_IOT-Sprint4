@@ -53,7 +53,7 @@ O objetivo dessa integração é **expandir o ecossistema do MoneyWise App**, in
 
 ## 🎬 Vídeo de Demonstração
 
-### 📺 [https://drive.google.com/file/d/1jf9xGbGNvSGTHyuX2_VFu4YbV4XBv-nx/view?usp=sharing]
+### 📺 https://drive.google.com/file/d/1jf9xGbGNvSGTHyuX2_VFu4YbV4XBv-nx/view?usp=sharing
 
 ---
 
